@@ -1,38 +1,28 @@
+import { Routes, Route } from "react-router-dom";
+
 import { useState, useEffect } from 'react'
-import axios from "axios";
+
+
+import HomePage from "./Pages/HomePage";
+import CodeAnalyzePage from "./Pages/CodeAnalyzePage";
+import ExpressionEvaluationPage from "./Pages/ExpressionEvaluationPage";
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
-  let [message, SetMessage] = useState("");
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchData = async () => {
-      try {
-
-        const res = await axios.get("http://localhost:3000/test", {
-          signal: controller.signal
-        }
-        );
-
-        SetMessage(res.data.message);
-
-      }
-
-      catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchData();
-
-    return () => {
-      controller.abort();
-    }
-
-  }, []);
+  
 
   return (
     <>
-      <h1>{message}</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/expression" element={<ExpressionEvaluationPage />} />
+        <Route path="/analyze" element={<CodeAnalyzePage />} />
+      </Routes>
+      <Footer />
+
     </>
   )
 }
