@@ -3,9 +3,9 @@ import Button from "../components/Button.jsx";
 export default function HomePage() {
     return (
         <div>
-            <h1>
+            <p className="font-bold text-blue-500">
                 Expression & Code Analyzer
-            </h1>
+            </p>
 
             <p >
                 Convert expressions (Infix, Prefix, Postfix) or analyze code complexity and nesting — all in one place.

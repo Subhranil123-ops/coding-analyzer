@@ -1,5 +1,7 @@
-export default function Button({ buttonLabel }) {
+import { Button } from "@/components/ui/button"
+
+export default function ButtonDefault({ buttonLabel }) {
     return (
-        <button type="submit">{buttonLabel}</button>
+        <Button type="submit">{buttonLabel}</Button>
     )
 }

@@ -5,23 +5,24 @@ module.exports.postExpressionForm = async (req, res) => {
     try {
         const result = await axios.post('http://localhost:5000/expression', { expression });
         console.log(result.data);
-        // res.render("./pages/expression.ejs", { data: result.data, error: null, expression: expression });
+        res.json(result.data);
     } catch (err) {
         console.log(err.response.data?.message || "Something went wrong");
-        // res.render("./pages/expression.ejs", { data: null, error: err.response.data?.message || "Something went wrong", expression: expression });
+        res.status(code).json({ message: err.response.data?.message || "Something went wrong" });
     }
 
 }
 
 module.exports.postAnalyzeForm = async (req, res) => {
     const { code } = req.body;
+    console.log(code);
     try {
         const result = await axios.post('http://localhost:5000/analyze', { code });
         console.log(result.data);
-        // res.render("./pages/analyze.ejs", { data: result.data, error: null, code: code });
+        res.json(result.data);
     } catch (err) {
         console.log(err.response.data?.message || "Something went wrong");
-        // res.render("./pages/analyze.ejs", { data: null, error: err.response.data?.message || "Something went wrong", code: code });
+        res.status(code).json({ message: err.response.data?.message || "Something went wrong" });
     }
 }
 
