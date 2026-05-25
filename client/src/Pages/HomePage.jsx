@@ -2,16 +2,16 @@ import Button from "../components/Button.jsx";
 
 export default function HomePage() {
     return (
-        <div>
-            <p className="font-bold text-blue-500">
+        <div className="min-h-screen p-6 bg-black flex flex-col gap-4 justify-center items-center" >
+            <p className="text-7xl font-bold text-blue-500">
                 Expression & Code Analyzer
             </p>
 
-            <p >
+            <p  className="text-white text-xl">
                 Convert expressions (Infix, Prefix, Postfix) or analyze code complexity and nesting — all in one place.
             </p>
 
-            <div>
+            <div className="flex gap-4">
 
                 <a href="/expression">
                     <Button buttonLabel="⚡ Expression Tool" />

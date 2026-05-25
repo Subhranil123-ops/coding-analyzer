@@ -249,3 +249,110 @@ http://localhost:3000/home
 ## 📄 License
 
 This project is for educational purposes.
+
+
+# Future Improvements / Roadmap
+
+## UI & UX Improvements
+- [ ] Add hover effects on result cards
+- [ ] Add smooth animations and transitions
+- [ ] Improve mobile responsiveness
+- [ ] Add icons for loops, conditions, complexity, etc.
+- [ ] Add loading states while analyzing
+- [ ] Add toast notifications for errors/success
+- [ ] Add dark/light theme toggle
+- [ ] Improve typography and spacing consistency
+
+---
+
+## Visualization Features
+
+### Charts & Graphs
+- [ ] Add bar chart for loop/condition counts
+- [ ] Add pie chart for code structure distribution
+- [ ] Add complexity visualization meter
+- [ ] Add nesting depth tree visualization
+- [ ] Add execution flow visualization
+- [ ] Add expression conversion step visualization
+
+---
+
+## Expression Analyzer Improvements
+- [ ] Step-by-step infix to postfix conversion
+- [ ] Stack visualization during conversion
+- [ ] Expression tree generation
+- [ ] Expression validation with error highlighting
+- [ ] Support variables and functions
+- [ ] Support advanced mathematical operators
+- [ ] Add expression evaluation support
+
+---
+
+## Code Analyzer Improvements
+- [ ] Better time complexity detection
+- [ ] Space complexity estimation
+- [ ] Detect recursion
+- [ ] Detect nested loops more accurately
+- [ ] Detect switch/case statements
+- [ ] Detect functions/classes
+- [ ] Detect unreachable code
+- [ ] Detect infinite loops
+- [ ] Add cyclomatic complexity analysis
+- [ ] Add code smell detection
+
+---
+
+## Advanced Features
+- [ ] Syntax highlighting
+- [ ] Monaco editor integration
+- [ ] File upload support
+- [ ] Export analysis report as PDF
+- [ ] Save analysis history
+- [ ] Authentication system
+- [ ] AI-based code suggestions
+- [ ] Real-time analysis while typing
+
+### Multi-language Support
+- [ ] C++
+- [ ] Java
+- [ ] Python
+- [ ] JavaScript
+
+---
+
+## Dashboard Ideas
+- [ ] Analysis statistics dashboard
+- [ ] Previous analysis history
+- [ ] Complexity trend graphs
+- [ ] Most used structures analytics
+- [ ] User performance analytics
+
+---
+
+## Dev Tool Inspired Features
+- [ ] Git visualizer
+- [ ] Regex engine visualizer
+- [ ] Debugger simulation
+- [ ] AST (Abstract Syntax Tree) visualization
+- [ ] Compiler pipeline visualization
+- [ ] Memory/stack visualization
+- [ ] Tokenizer visualization
+
+---
+
+## Performance Improvements
+- [ ] Optimize parser speed
+- [ ] Improve large code handling
+- [ ] Lazy rendering for large outputs
+- [ ] Better state management
+- [ ] Backend optimization
+
+---
+
+## Long-Term Vision
+- [ ] Turn project into a complete developer toolkit
+- [ ] Add interactive learning mode
+- [ ] Add DSA visualization support
+- [ ] Add competitive programming utilities
+- [ ] Add collaborative sharing features
+- [ ] Add plugin architecture for custom analyzers

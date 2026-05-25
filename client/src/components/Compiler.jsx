@@ -1,20 +1,15 @@
 import Button from "../components/Button.jsx"
 import {
     Card,
-    CardAction,
     CardContent,
     CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
 } from "@/components/ui/card"
 
 import {
     Field,
-    FieldDescription,
     FieldLabel,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 
 import ResultCard from "../components/ResultCard.jsx";
@@ -57,34 +52,40 @@ export default function Compiler({ placeholder, name, buttonLabel, label }) {
     }
 
     return (
-        <div>
-            <form method="POST" onSubmit={handleSubmit}>
-                <Field data-invalid>
-                    <FieldLabel htmlFor="input-field-username">{label}</FieldLabel>
-                    <Input
-                        name={name}
+        <div className="mx-auto max-w-3xl w-full p-6">
+            <form className="flex flex-col justify-center items-center gap-4 " onSubmit={handleSubmit}>
+                <Field>
+                    <FieldLabel htmlFor="textarea-code" className="text-white fw-bold text-base">{label}</FieldLabel>
+                    <Textarea id="textarea-code" name={name}
+                       className="text-white resize-none overflow-y-auto h-64 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black"
+                        rows={10}
                         placeholder={placeholder}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        required
-                    />
-                </Field>
-
-                <div>
+                        required />
                     <Button buttonLabel={buttonLabel} />
+                </Field>
+                <div>
+
                 </div>
 
             </form>
-            <Card>
-                <CardContent>
-                    {
-                        Object.keys(result).length > 0 &&
-                        Object.entries(result).map(([key, value]) => {
-                            return <ResultCard key={key} title={LABELS[key]} value={value} />
-                        })
-                    }
-                </CardContent>
-            </Card>
+
+            {
+                Object.keys(result).length > 0 && (
+                    <Card className="flex flex-col justify-center max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
+                        <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >Expression Result</CardDescription>
+                        <CardContent className="grid grid-cols-2 gap-4">
+                           
+                            {
+                                Object.entries(result).map(([key, value]) => {
+                                    return <ResultCard key={key} title={LABELS[key]} value={value} />
+                                })
+                            }
+                        </CardContent>
+                    </Card>
+                )
+            }
         </div>
     )
 }
