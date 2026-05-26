@@ -1,5 +1,5 @@
 "use client"
-import Button from "../components/Button.jsx"
+
 import {
     Card,
     CardContent,
@@ -13,10 +13,10 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Toaster } from "@/components/ui/sonner"
-
 import { toast } from "sonner"
 
 import ResultCard from "../components/ResultCard.jsx";
+import Button from "../components/Button.jsx"
 import { useState } from "react";
 import axios from "axios";
 
