@@ -7,7 +7,6 @@ module.exports.postExpressionForm = async (req, res) => {
         res.json(result?.data);
     } catch (err) {
         const code = err.response?.status || 500;
-        console.log(err.response.data?.message || "Something went wrong");
         res.status(code).json({ message: err.response.data?.message || "Something went wrong" });
     }
 
@@ -20,7 +19,6 @@ module.exports.postAnalyzeForm = async (req, res) => {
         res.json(result.data);
     } catch (err) {
         const code = err.response?.status || 500;
-        console.log(err.response.data?.message || "Something went wrong");
         res.status(code).json({ message: err.response.data?.message || "Something went wrong" });
     }
 }

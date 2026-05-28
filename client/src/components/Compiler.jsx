@@ -31,7 +31,7 @@ export default function Compiler({ placeholder, name, buttonLabel, label, result
         try {
             setLoading(true);
             setError("");
-            const res = await axios.post(`http://localhost:3000/${name}`, {
+            const res = await axios.post(`http://192.168.29.53:3000/${name}`, {
                 [name]: input
             });
             setResult(res.data);
@@ -65,13 +65,12 @@ export default function Compiler({ placeholder, name, buttonLabel, label, result
     return (
         <><Toaster richColors closeButton position="top-center" />
 
-            <div className="mx-auto max-w-3xl w-full p-6">
-                <form className="flex flex-col justify-center items-center gap-4 " onSubmit={handleSubmit}>
-                    <Field>
+            <div className="mx-auto max-w-4xl w-full p-4 sm:p-6">
+                <form className="flex flex-col justify-center w-full gap-4 " onSubmit={handleSubmit}>
+                    <Field className="w-full">
                         <FieldLabel htmlFor="textarea-code" className="text-white fw-bold text-base">{label}</FieldLabel>
                         <Textarea id="textarea-code" name={name}
-                            className={`text-white resize-none overflow-y-auto h-64 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black ${error.length > 0 ? "border-red-500 focus-visible:ring-red-500" : ""} ${Object.keys(result).length > 0 ? "border-green-500 focus-visible:ring-green-500" : ""}`}
-                            rows={10}
+                            className={`w-full text-white resize-none overflow-y-auto min-h-[180px] md:min-h-[250px] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-black ${error.length > 0 ? "border-red-500 focus-visible:ring-red-500" : ""} ${Object.keys(result).length > 0 ? "border-green-500 focus-visible:ring-green-500" : ""}`}
                             placeholder={placeholder}
                             value={input}
                             onChange={(e) => { setInput(e.target.value); setResult({}); setError(""); toast.dismiss(); }}
@@ -87,16 +86,16 @@ export default function Compiler({ placeholder, name, buttonLabel, label, result
                 </form>
 
                 {
-                    loading ? (<Card className="max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
-                        <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >{resultHeading}</CardDescription>
-                        <CardContent className="grid grid-cols-2 gap-4 place-items-center">
+                    loading ? (<Card className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-2 sm:p-4">
+                        <CardDescription className="mb-6 text-center font-bold text-xl sm:text-3xl text-white w-full" >{resultHeading}</CardDescription>
+                        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4  w-full">
                             {Array.from({ length: CARD_CONFIG[name] }).map((_, index) => (<Skeleton key={index} className="h-20 w-full rounded-xl" />))}
                         </CardContent>
                     </Card>) : (
                         Object.keys(result).length > 0 && (
-                            <Card className="flex flex-col justify-center max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
-                                <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >{resultHeading}</CardDescription>
-                                <CardContent className="grid grid-cols-2 gap-4">
+                            <Card className="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-2 sm:p-4">
+                                <CardDescription className="mb-6 text-center font-bold text-xl sm:text-3xl text-white w-full" >{resultHeading}</CardDescription>
+                                <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                                     {
                                         Object.entries(result).map(([key, value]) => {
                                             return <ResultCard key={key} title={LABELS[key]} value={value} />
