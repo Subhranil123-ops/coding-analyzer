@@ -20,7 +20,7 @@ import Button from "../components/Button.jsx"
 import { useState } from "react";
 import axios from "axios";
 
-export default function Compiler({ placeholder, name, buttonLabel, label }) {
+export default function Compiler({ placeholder, name, buttonLabel, label, resultHeading }) {
     const [input, setInput] = useState("");
     const [result, setResult] = useState({});
     const [error, setError] = useState("");
@@ -57,6 +57,11 @@ export default function Compiler({ placeholder, name, buttonLabel, label }) {
         for: "For"
     }
 
+    const CARD_CONFIG = {
+        expression: 4,
+        code: 6,
+    }
+
     return (
         <><Toaster richColors closeButton position="top-center" />
 
@@ -81,33 +86,26 @@ export default function Compiler({ placeholder, name, buttonLabel, label }) {
 
                 </form>
 
-
-                loading && ?(<Card className="flex flex-col justify-center max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
-                    <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >Expression Result</CardDescription>
-                    <CardContent className="grid grid-cols-2 gap-4">
-
-                        <Skeleton className="h-4 w-[250px]" />
-                        <Skeleton className="h-4 w-[250px]" />
-                        <Skeleton className="h-4 w-[250px]" />
-                        <Skeleton className="h-4 w-[250px]" />
-                    </CardContent>
-                </Card>):({
-                    Object.keys(result).length > 0 && (
-                        <Card className="flex flex-col justify-center max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
-                            <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >Expression Result</CardDescription>
-                            <CardContent className="grid grid-cols-2 gap-4">
-
-                                {
-                                    Object.entries(result).map(([key, value]) => {
-                                        return <ResultCard key={key} title={LABELS[key]} value={value} />
-                                    })
-                                }
-                            </CardContent>
-                        </Card>
+                {
+                    loading ? (<Card className="max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
+                        <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >{resultHeading}</CardDescription>
+                        <CardContent className="grid grid-cols-2 gap-4 place-items-center">
+                            {Array.from({ length: CARD_CONFIG[name] }).map((_, index) => (<Skeleton key={index} className="h-20 w-full rounded-xl" />))}
+                        </CardContent>
+                    </Card>) : (
+                        Object.keys(result).length > 0 && (
+                            <Card className="flex flex-col justify-center max-w-4xl mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl">
+                                <CardDescription className="mb-6 text-center font-bold text-3xl text-white" >{resultHeading}</CardDescription>
+                                <CardContent className="grid grid-cols-2 gap-4">
+                                    {
+                                        Object.entries(result).map(([key, value]) => {
+                                            return <ResultCard key={key} title={LABELS[key]} value={value} />
+                                        })
+                                    }
+                                </CardContent>
+                            </Card>)
                     )
-                })
-
-
+                }
 
             </div>
         </>
