@@ -31,7 +31,7 @@ export default function Compiler({ placeholder, name, buttonLabel, label, result
         try {
             setLoading(true);
             setError("");
-            const res = await axios.post(`http://192.168.29.53:3000/${name}`, {
+            const res = await axios.post(`/api/${name}`, {
                 [name]: input
             });
             setResult(res.data);
