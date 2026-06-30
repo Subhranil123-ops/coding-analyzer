@@ -2,6 +2,7 @@
 #include "crow.h"
 #include <iostream>
 #include "Myvector.h"
+#include "validator.h"
 #include "detector.h"
 #include "converter.h"
 #include "evaluator.h"
@@ -74,6 +75,8 @@ int main()
 
         return crow::response(200, res); });
 
+    // Expression Evaluator
+
     CROW_ROUTE(app, "/expression")
         .methods("POST"_method)([](const crow::request &req)
                                 {
@@ -81,17 +84,17 @@ int main()
 
                                     if (!body)
                                     {
-                                        return makeError(400,"Invalid or empty JSON");
+                                        return makeError(400, "Invalid or empty JSON");
                                     }
 
                                     if (!body.has("expression"))
                                     {
-                                        return makeError(400,"Missing Expression Field");
+                                        return makeError(400, "Missing Expression Field");
                                     }
 
                                     if (body["expression"].t() != crow::json::type::String)
                                     {
-                                        return makeError(400,"Expression Field must be a string");
+                                        return makeError(400, "Expression Field must be a string");
                                     }
 
                                     string input = body["expression"].s();
@@ -100,84 +103,59 @@ int main()
 
                                     if (input.empty() || isEmpty)
                                     {
-                                        return makeError(400,"Invalid expression");
+                                        return makeError(400, "Invalid expression");
                                     }
 
                                     if (isCodeInput(input))
                                     {
-                                        return makeError(400,"Provided input is not valid expression");
+                                        return makeError(400, "Provided input is not valid expression");
                                     }
-
-                                    Type t = detectType(input);
-
-                                    if (t == INVALID)
+                                    try
                                     {
-                                        return makeError(400,"Invalid expression type. Please provide a valid infix, prefix, or postfix expression.");
-                                    }
+                                        validateExpression(input);
+                                        
+                                        Type t = detectType(input);
+                                        string postfix = "";
 
-                                    string postfix = "";
-
-                                    if (t == INFIX)
-                                    {
-                                        try
+                                        if (t == INFIX)
                                         {
                                             postfix = infixToPostfix(input);
                                         }
-                                        catch (exception &e)
-                                        {
-                                            cout << "error : " << e.what() << endl;
-                                            return makeError(400,e.what());
-                                        }
-                                    }
-
-                                    else if (t == PREFIX)
-                                    {
-                                        try
+                                        else if (t == PREFIX)
                                         {
                                             postfix = prefixToPostfix(input);
                                         }
-                                        catch (exception &e)
+                                        else
+                                            postfix = input;
+
+                                        if (postfix == "")
                                         {
-                                            return makeError(400,e.what());
+                                            return makeError(400, "Conversion failed. Please check your expression and try again.");
                                         }
-                                    }
 
-                                    else
-                                        postfix = input;
+                                        crow::json::wvalue res;
 
-                                    if (postfix == "")
-                                    {
-                                        return makeError(400,"Conversion failed. Please check your expression and try again.");
-                                    }
+                                        res["postfix"] = postfix;
 
-                                    crow::json::wvalue res;
-                                    res["postfix"] = postfix;
-                                    try
-                                    {
                                         res["infix"] = postfixToInfix(postfix);
-                                    }
-                                    catch (exception &e)
-                                    {
-                                        return makeError(400,e.what());
-                                    }
-                                    try
-                                    {
+
                                         res["prefix"] = postfixToPrefix(postfix);
-                                    }
-                                    catch (exception &e)
-                                    {
-                                        return makeError(400,e.what());
-                                    }
-                                    try
-                                    {
+
                                         res["result"] = postfixEvaluation(postfix);
+
+                                        return crow::response(200, res);
                                     }
                                     catch (exception &e)
                                     {
-                                        return makeError(400,e.what());
+                                        return makeError(400, e.what());
                                     }
-                                    return crow::response(200, res); });
+
+                                    // if (t == INVALID)
+                                    // {
+                                    //     return makeError(400, "Invalid expression type. Please provide a valid infix, prefix, or postfix expression.");
+                                    // }
+                                });
 
     app.port(5000).multithreaded().run();
     return 0;
-}
+};
