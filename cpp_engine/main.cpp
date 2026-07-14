@@ -99,13 +99,6 @@ int main()
 
                                     string input = body["expression"].s();
 
-                                    bool isEmpty = input.find_first_not_of(" \t\n") == string::npos;
-
-                                    if (input.empty() || isEmpty)
-                                    {
-                                        return makeError(400, "Invalid expression");
-                                    }
-
                                     if (isCodeInput(input))
                                     {
                                         return makeError(400, "Provided input is not valid expression");
@@ -113,12 +106,14 @@ int main()
                                     try
                                     {
                                         validateExpression(input);
-                                        
+
                                         Type t = detectType(input);
                                         string postfix = "";
 
                                         if (t == INFIX)
                                         {
+
+                                            
                                             postfix = infixToPostfix(input);
                                         }
                                         else if (t == PREFIX)

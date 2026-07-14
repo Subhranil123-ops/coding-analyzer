@@ -2,60 +2,71 @@
 #include <string>
 #include "validator.h"
 #include "helpers.h"
+#include "stack.h"
+
 using namespace std;
-
-bool validateBalancedParenthesis(const string &exp)
+void validate_empty_exp(const string &exp)
 {
-}
+    bool isEmpty = exp.find_first_not_of(" \t\n") == string::npos;
 
-bool validateStarting(const string &exp)
-{
-}
-
-bool validateTwoOperatorsAdjacent(const string &exp)
-{
+    if (exp.empty() || isEmpty)
+    {
+        throw invalid_argument("Expression is Empty");
+    }
 }
 
 void validateCharacters(const string &exp)
 {
-    for (auto &ch : exp)
+    for (char ch : exp)
     {
         if (isdigit(ch))
             continue;
-        else if (ch == ' ')
+        if (ch == ' ')
             continue;
-        else if (isOperator(ch))
+        if (isOperator(ch))
             continue;
-        else if (ch == '(' || ch == ')')
+        if (ch == '(' || ch == ')')
             continue;
-        else
-        {
-            throw invalid_argument("Invalid Character '" + string(1, ch) + "'");
-        }
+
+        throw invalid_argument("Invalid Character '" + string(1, ch) + "'");
     }
 }
 
+void validateBalancedParenthesis(const string &exp)
+{
+    Stack<char> s;
+    for (char ch : exp)
+    {
+        if (ch == '(')
+        {
+            s.push(ch);
+        }
+        else if (ch == ')')
+        {
+            if (!s.isEmpty())
+                s.pop();
+            else
+                throw invalid_argument("Unbalanced Parenthesis");
+        }
+    }
+    if (!s.isEmpty())
+    {
+        throw invalid_argument("Unbalanced Parenthesis");
+    }
+}
+
+
+
 bool validateExpression(const string &exp)
 {
-    // balanced parenthesis
-    void validateBalancedParenthesis(exp)
-    {
-    }
-
-    // operator at front
-    void validateStarting(exp)
-    {
-    }
-
-    // two operator together
-    void validateTwoOperatorsAdjacent(exp)
-    {
-    }
+    // validate empty
+    validate_empty_exp(exp);
 
     // special characters
-    void validateCharacters(exp)
-    {
-    }
+    validateCharacters(exp);
+
+    // balanced parenthesis
+    validateBalancedParenthesis(exp);
 
     return true;
 }
