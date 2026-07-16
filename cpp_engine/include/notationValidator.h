@@ -3,9 +3,8 @@
 #include <string>
 using namespace std;
 
-inline bool isOperator(char &ch)
-{
-    return (ch == '+') || (ch == '-') || (ch == '*') || (ch == '/');
-}
+void validatePrefix(const string &exp);
+void validateInfix(const string &exp);
+void validatePostfix(const string &exp);
 
 #endif

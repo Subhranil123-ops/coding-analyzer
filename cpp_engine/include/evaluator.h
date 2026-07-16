@@ -2,7 +2,7 @@
 #define EVALUATOR_H
 
 #include <string>
-
-int postfixEvaluation(std::string exp);
+using namespace std;
+int postfixEvaluation(const string &exp);
 
 #endif

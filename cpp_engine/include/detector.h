@@ -9,9 +9,8 @@ enum Type
     INFIX,
     POSTFIX,
     PREFIX,
-    INVALID
 };
 
-Type detectType(string exp);
+Type detectType(const string &exp);
 
 #endif

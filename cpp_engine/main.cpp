@@ -3,7 +3,8 @@
 #include <iostream>
 #include "Myvector.h"
 #include "validator.h"
-#include "detector.h"
+#include "notationValidator.h"
+#include "processor.h"
 #include "converter.h"
 #include "evaluator.h"
 #include "analyzer.h"
@@ -108,25 +109,7 @@ int main()
                                         validateExpression(input);
 
                                         Type t = detectType(input);
-                                        string postfix = "";
-
-                                        if (t == INFIX)
-                                        {
-
-                                            
-                                            postfix = infixToPostfix(input);
-                                        }
-                                        else if (t == PREFIX)
-                                        {
-                                            postfix = prefixToPostfix(input);
-                                        }
-                                        else
-                                            postfix = input;
-
-                                        if (postfix == "")
-                                        {
-                                            return makeError(400, "Conversion failed. Please check your expression and try again.");
-                                        }
+                                        string postfix = getPostfix(input,t);
 
                                         crow::json::wvalue res;
 
@@ -143,13 +126,7 @@ int main()
                                     catch (exception &e)
                                     {
                                         return makeError(400, e.what());
-                                    }
-
-                                    // if (t == INVALID)
-                                    // {
-                                    //     return makeError(400, "Invalid expression type. Please provide a valid infix, prefix, or postfix expression.");
-                                    // }
-                                });
+                                    } });
 
     app.port(5000).multithreaded().run();
     return 0;
