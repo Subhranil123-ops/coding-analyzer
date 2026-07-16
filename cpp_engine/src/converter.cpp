@@ -16,12 +16,6 @@ int precedence(char op)
 // INFIX TO POSTFIX
 string infixToPostfix(string exp)
 {
-    if (exp.empty())
-    {
-        throw invalid_argument("Invalid Expression");
-         
-    }
-
     Stack<char> s;
     int len = exp.length();
     string ans;
@@ -43,11 +37,6 @@ string infixToPostfix(string exp)
             ans += ' ';
             i--;
         }
-        else if (isalpha(ch))
-        {
-            throw invalid_argument("Invalid Expression");
-             
-        }
 
         // operator
         else
@@ -64,11 +53,6 @@ string infixToPostfix(string exp)
                     s.pop();
                 }
                 // if empty it means that balanced parenthesis is not there in the exp....
-                if (s.isEmpty())
-                {
-                    throw invalid_argument("Balanced Parenthesis!!");
-                     
-                }
                 s.pop(); // remove ( at last when the top is (
             }
 
@@ -87,11 +71,6 @@ string infixToPostfix(string exp)
 
     while (!s.isEmpty())
     {
-        if (s.peek() == '(')
-        {
-            throw invalid_argument("Balanced Parenthesis!!");
-             
-        }
         ans += s.peek();
         ans += ' ';
         s.pop();
@@ -127,13 +106,6 @@ string postfixToInfix(string exp)
 
         else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
         {
-            // if in stack there are less than two operands then invalid
-            if (s.size() < 2)
-            {
-                throw invalid_argument("Invalid Expression");
-                 
-            }
-
             string op2 = s.peek();
             s.pop();
             string op1 = s.peek();
@@ -141,20 +113,8 @@ string postfixToInfix(string exp)
             string temp = "(" + op1 + ch + op2 + ")";
             s.push(temp);
         }
-        // invlaid characters like $ % & #
-        else
-        {
-            throw invalid_argument("Invalid Expression");
-             
-        }
     }
 
-    // at last the size of the stack should be 1 (the result)
-    if (s.size() != 1)
-    {
-       throw invalid_argument("Invalid Expression");
-         
-    }
     return s.peek();
 }
 
@@ -184,11 +144,6 @@ string postfixToPrefix(string exp)
         // operators handling
         else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
         {
-            if (s.size() < 2)
-            {
-                throw invalid_argument("Invalid Expression");
-                 
-            }
             string op2 = s.peek();
             s.pop();
             string op1 = s.peek();
@@ -196,17 +151,8 @@ string postfixToPrefix(string exp)
             string result = string(1, ch) + " " + op1 + " " + op2;
             s.push(result);
         }
-        else
-        {
-            throw invalid_argument("Invalid Expression");
-             
-        }
     }
 
-    if (s.size() != 1)
-    {
-        throw invalid_argument("Invalid Expression");
-    }
     return s.peek();
 }
 
@@ -238,10 +184,6 @@ string prefixToPostfix(string exp)
         // handling operators
         else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
         {
-            if (s.size() < 2)
-            {
-                throw invalid_argument("Invalid Expression");
-            }
             string op1 = s.peek();
             s.pop();
             string op2 = s.peek();
@@ -249,17 +191,7 @@ string prefixToPostfix(string exp)
             string result = op1 + " " + op2 + " " + string(1, ch);
             s.push(result);
         }
-
-        // handling unwanted symbols
-        else
-        {
-            throw invalid_argument("Invalid Symbols!!");     
-        }
     }
 
-    if (s.size() != 1)
-    {
-        throw invalid_argument("Invalid Expression");
-    }
     return s.peek();
 }

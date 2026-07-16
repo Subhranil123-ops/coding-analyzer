@@ -1,28 +1,46 @@
 #include <iostream>
+#include <stdexcept>
 #include "helpers.h"
 using namespace std;
 
-void validatePrefix()
+void validatePrefix(const string &exp)
 {
-}
+    int n = exp.size();
+    int operands = 0;
+    for (int i = n - 1; i >= 0; --i)
+    {
+        if (exp[i] == ' ')
+            continue;
+        char ch = exp[i];
 
-void validateStarting(const string &exp)
-{
-    if (isOperator(exp[0]))
-        throw invalid_argument("Infix expression cannot start with an operator");
-}
-
-void validateEnding(const string &exp)
-{
-    if (isOperator(exp[exp.size() - 1]))
-        throw invalid_argument("Infix expression cannot end with an operator");
+        if (isdigit(ch))
+        {
+            while (i - 1 >= 0 && isdigit(exp[i - 1]))
+            {
+                i--;
+            }
+            operands++;
+        }
+        else if (isOperator(ch))
+        {
+            if (operands < 2)
+            {
+                throw invalid_argument("Operator does not have enough operands");
+            }
+            operands--;
+        }
+    }
+    if (operands != 1)
+    {
+        throw invalid_argument("Invalid prefix expression");
+    }
 }
 
 char previousNonSpace(const string &exp, int i)
 {
     char prev = '\0';
     int j = i - 1;
-    while (j < exp.size())
+    while (j >= 0)
     {
         if (exp[j] != ' ')
         {
@@ -38,7 +56,7 @@ char nextNonSpace(const string &exp, int i)
 {
     char next = '\0';
     int j = i + 1;
-    while (j >= 0)
+    while (j < exp.size())
     {
         if (exp[j] != ' ')
         {
@@ -52,12 +70,6 @@ char nextNonSpace(const string &exp, int i)
 
 void validateInfix(const string &exp)
 {
-    // validate starting
-    validateStarting(exp);
-
-    // validate ending
-    validateEnding(exp);
-
     // traversal through the expression
     int n = exp.size();
     for (int i = 0; i < n; ++i)
@@ -65,18 +77,18 @@ void validateInfix(const string &exp)
         if (exp[i] == ' ')
             continue;
         char ch = exp[i];
-        
+
         // prev of curr character
         char prev = previousNonSpace(exp, i);
-        
+
         // for multidigit numbers
         if (isdigit(ch))
         {
             while (i + 1 < n && isdigit(exp[i + 1]))
                 i++;
         }
-        
-        //next of curr character
+
+        // next of curr character
         char next = nextNonSpace(exp, i);
 
         // Starting
@@ -90,8 +102,7 @@ void validateInfix(const string &exp)
         {
             throw invalid_argument("Infix expression cannot end with an operator");
         }
-        
-        
+
         if (isOperator(ch))
         {
             if (isOperator(prev) || isOperator(next))
@@ -146,6 +157,35 @@ void validateInfix(const string &exp)
     }
 }
 
-void validatePostfix()
+void validatePostfix(const string &exp)
 {
+    int n = exp.size();
+    int operands = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        if (exp[i] == ' ')
+            continue;
+        char ch = exp[i];
+
+        if (isdigit(ch))
+        {
+            while (i + 1 < n && isdigit(exp[i + 1]))
+            {
+                i++;
+            }
+            operands++;
+        }
+        else if (isOperator(ch))
+        {
+            if (operands < 2)
+            {
+                throw invalid_argument("Operator does not have enough operands");
+            }
+            operands--;
+        }
+    }
+    if (operands != 1)
+    {
+        throw invalid_argument("Invalid postfix expression");
+    }
 }
