@@ -1,6 +1,5 @@
 #ifndef ERROR_H
 #define ERROR_H
-#define CROW_USE_ASIO
 #include "crow.h"
 #include <string>
 

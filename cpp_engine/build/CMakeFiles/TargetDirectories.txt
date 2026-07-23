@@ -1,0 +1,4 @@
+D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/build/CMakeFiles/server.dir
+D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/build/CMakeFiles/expression_test.dir
+D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/build/CMakeFiles/edit_cache.dir
+D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/build/CMakeFiles/rebuild_cache.dir
