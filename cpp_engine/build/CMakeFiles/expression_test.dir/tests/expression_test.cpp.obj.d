@@ -141,6 +141,23 @@ CMakeFiles/expression_test.dir/tests/expression_test.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/15.2.0/istream \
  C:/msys64/mingw64/include/c++/15.2.0/bits/istream.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/iomanip \
+ C:/msys64/mingw64/include/c++/15.2.0/locale \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.h \
+ C:/msys64/mingw64/include/c++/15.2.0/ctime \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/time_members.h \
+ C:/msys64/mingw64/include/c++/15.2.0/x86_64-w64-mingw32/bits/messages_members.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/codecvt.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/locale_facets_nonio.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/locale_conv.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/quoted_string.h \
+ C:/msys64/mingw64/include/c++/15.2.0/sstream \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/sstream.tcc \
+ C:/msys64/mingw64/include/c++/15.2.0/vector \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_uninitialized.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_vector.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/stl_bvector.h \
+ C:/msys64/mingw64/include/c++/15.2.0/bits/vector.tcc \
  D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/include/expression/validator.h \
  D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/include/expression/detector.h \
  D:/Web2/projects/project/majorProjects/codingAnalyzer/cpp_engine/include/expression/processor.h \
